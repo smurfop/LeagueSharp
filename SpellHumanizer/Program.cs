@@ -17,7 +17,8 @@ namespace SpellHumanizer
 
         private static void Game_OnGameLoad(EventArgs args)
         {
-            Game.PrintChat("SpellHumanizer Loaded!");
+            //Game.PrintChat("SpellHumanizer Loaded!");
+            Console.WriteLine("SpellHumanizer LOADED");
             Game.OnGameSendPacket += Game_OnGameSendPacket;
         }
 

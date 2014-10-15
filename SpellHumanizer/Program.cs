@@ -31,7 +31,11 @@ namespace SpellHumanizer
             
             if(IsSummonerSpell(args.PacketData[5]) == true) {
                 Game.PrintChat("Detected use of Summoner Spell!");
-                return;
+                if(ObjectManager.Player.IsDead) {
+                    args.Process = false;
+                } else {
+                    return;
+                }
             }
 
             var spellState = ObjectManager.Player.Spellbook.CanUseSpell((SpellSlot) args.PacketData[6]);

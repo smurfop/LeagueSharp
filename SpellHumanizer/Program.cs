@@ -27,6 +27,10 @@ namespace SpellHumanizer
             {
                 return;
             }
+            
+            if(IsSummonerSpell(args.PacketData[5]) == true) {
+                Game.PrintChat("Detected use of Summoner Spell!");
+            }
 
             var spellState = ObjectManager.Player.Spellbook.CanUseSpell((SpellSlot) args.PacketData[6]);
 
@@ -37,5 +41,16 @@ namespace SpellHumanizer
                 args.Process = false;
             }
         }
+        
+        private static bool IsSummonerSpell(byte spellByte)
+        {
+            if(spellByte == 0xE9) return true;
+            if(spellByte == 0xEF) return true;
+            if(spellByte == 0x8B) return true;
+            if(spellByte == 0xED) return true;
+            if(spellByte == 0x63) return true;
+            return false;
+        }
+        
     }
 }

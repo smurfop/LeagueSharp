@@ -23,14 +23,16 @@ namespace SpellHumanizer
 
         private static void Game_OnGameSendPacket(GamePacketEventArgs args)
         {
-            if (args.PacketData[0] != Packet.C2S.Cast.Header || IsSummonerSpell(args.PacketData[5]))
+            if (args.PacketData[0] != Packet.C2S.Cast.Header)
             {
                 return;
             }
             
-            //if(IsSummonerSpell(args.PacketData[5]) == true) {
-            //    Game.PrintChat("Detected use of Summoner Spell!");
-            //}
+            
+            if(IsSummonerSpell(args.PacketData[5]) == true) {
+                Game.PrintChat("Detected use of Summoner Spell!");
+                return;
+            }
 
             var spellState = ObjectManager.Player.Spellbook.CanUseSpell((SpellSlot) args.PacketData[6]);
 
